@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 
 import "./globals.css";
 import { AuthContextProvider } from "@/components/context/AuthContext";
+import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthContextProvider>
+          <Navbar />
           {children}
           <Toaster />
         </AuthContextProvider>

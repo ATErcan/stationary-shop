@@ -17,7 +17,10 @@ export interface ISignUpResponse extends APIResponse {
 
 export interface ILoginResponse extends APIResponse, ISignUpResponse {};
 
-export interface IUserResponse extends IUser, APIResponse {};
+export interface IUserData extends IUser, APIResponse {};
+export interface IUserResponse {
+  data: IUserData;
+};
 
 export interface IErrorResponse {
   error: {
