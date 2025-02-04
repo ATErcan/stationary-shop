@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { STATIONERY_API, STATIONERY_API_TIMEOUT } from "../constants/api";
-import { ILoginRequest, ISignUpRequest } from "../types/requests/user.type";
+import { ILoginRequest, ISignUpRequest, IUpdateProfileRequest } from "../types/requests/user.type";
 import { ILoginResponse, ISignUpResponse, IUserResponse } from "../types/responses/user.type";
 import { getCookie } from "./cookies";
 
@@ -69,6 +69,29 @@ export const postData = async <T>(
   }
 };
 
+export const patchData = async <T>(
+  url: string,
+  options: Record<string, any>,
+  config?: AxiosRequestConfig
+): Promise<T> => {
+  try {
+    const response: AxiosResponse<T> = await Stationery_API.patch(
+      url,
+      options,
+      config
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating data:", error);
+    if (axios.isAxiosError(error)) {
+      throw error.response?.data.error;
+    } else {
+      throw new Error("Unknown error while request");
+    }
+  }
+};
+
+
 export const signUp = async (
   user: ISignUpRequest,
 ): Promise<ISignUpResponse> => {
@@ -94,3 +117,19 @@ export const getUser = async (): Promise<IUserResponse | null> => {
     }
   });
 }
+
+export const updateProfile = async (
+  user: IUpdateProfileRequest
+): Promise<IUserResponse | null> => {
+  const token = await getCookie(process.env.NEXT_PUBLIC_TOKEN_NAME!);
+  if (!token) return null;
+  return patchData<IUserResponse>(
+    "/users/me",
+    { ...user },
+    {
+      headers: {
+        Authorization: `Bearer ${token.value}`,
+      },
+    }
+  );
+};

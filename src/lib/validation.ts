@@ -42,3 +42,16 @@ export const LogInFormValidation = z.object({
     .min(1, "Password is required")
     .min(8, "Password must be at least 8 characters")
 });
+
+export const ProfileFormValidation = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "First name is required")
+    .min(2, "First name must be at least 2 characters")
+    .max(30, "First name must be at most 30 characters"),
+  lastName: z
+    .string()
+    .trim()
+    .max(30, "Last name must be at most 30 characters"),
+});

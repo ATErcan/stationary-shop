@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, PropsWithChildren, useContext, useEffect, useState } from "react";
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useContext, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { IUserResponse } from "@/lib/types/responses/user.type";
@@ -10,9 +10,11 @@ import { getCookie } from "@/lib/tools/cookies";
 export const AuthContext = createContext<{
   user: IUserResponse | null;
   loading: boolean;
+  setUser: Dispatch<SetStateAction<IUserResponse | null>>;
 }>({
   user: null,
-  loading: true
+  loading: true,
+  setUser: () => {},
 });
 
 export const AuthContextProvider = ({ children }: PropsWithChildren) => {
@@ -58,10 +60,10 @@ export const AuthContextProvider = ({ children }: PropsWithChildren) => {
   }, [router, pathname]);
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, loading, setUser }}>
       {children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 export const useAuth = () => {
