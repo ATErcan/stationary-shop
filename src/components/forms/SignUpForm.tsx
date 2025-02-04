@@ -3,6 +3,8 @@
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,8 +19,6 @@ import { Input } from "@/components/ui/input";
 import { SignUpFormValidation } from "@/lib/validation";
 import { signUp } from "@/lib/tools/api";
 import { setCookie } from "@/lib/tools/cookies";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 
 export default function SignUpForm() {
   const router = useRouter();
@@ -35,7 +35,6 @@ export default function SignUpForm() {
   });
 
   async function onSubmit(values: z.infer<typeof SignUpFormValidation>) {
-    console.log(values);
     try {
       const res = await signUp(values);
       setCookie(process.env.NEXT_PUBLIC_TOKEN_NAME!, res.jwt.token);

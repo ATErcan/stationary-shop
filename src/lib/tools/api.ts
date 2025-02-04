@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { STATIONERY_API, STATIONERY_API_TIMEOUT } from "../constants/api";
-import { ISignUpRequest } from "../types/requests/user.type";
-import { ISignUpResponse, IUserResponse } from "../types/responses/user.type";
+import { ILoginRequest, ISignUpRequest } from "../types/requests/user.type";
+import { ILoginResponse, ISignUpResponse, IUserResponse } from "../types/responses/user.type";
 import { getCookie } from "./cookies";
 
 const Stationery_API = axios.create({
@@ -73,6 +73,14 @@ export const signUp = async (
   user: ISignUpRequest,
 ): Promise<ISignUpResponse> => {
   return postData<ISignUpResponse>('/auth/signup', {
+    ...user,
+  });
+};
+
+export const login = async (
+  user: ILoginRequest,
+): Promise<ILoginResponse> => {
+  return postData<ILoginResponse>('/auth/login', {
     ...user,
   });
 };
