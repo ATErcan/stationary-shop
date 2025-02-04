@@ -85,7 +85,7 @@ export const login = async (
   });
 };
 
-export const checkUser = async (): Promise<IUserResponse | null> => {
+export const getUser = async (): Promise<IUserResponse | null> => {
   const token = await getCookie(process.env.NEXT_PUBLIC_TOKEN_NAME!);
   if(!token) return null;
   return fetchData<IUserResponse>('/users/me', {

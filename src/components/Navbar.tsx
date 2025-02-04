@@ -1,8 +1,8 @@
 'use client';
 
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-
-import { navigation } from "@/lib/config/navConfig";
+import toast from "react-hot-toast";
 import {
   Disclosure,
   DisclosureButton,
@@ -13,8 +13,10 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
+
+import { navigation } from "@/lib/config/navConfig";
 import { useAuth } from "./context/AuthContext";
-import { usePathname } from "next/navigation";
+import { deleteCookie } from "@/lib/tools/cookies";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -23,6 +25,17 @@ function classNames(...classes: string[]) {
 export default function Navbar() {
   const { user, loading } = useAuth();
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await deleteCookie(process.env.NEXT_PUBLIC_TOKEN_NAME!);
+      toast.success("Logout successful!", { id: "logout-success" });
+      router.push('/login');
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <Disclosure as="nav" className="bg-zinc-950">
@@ -54,7 +67,7 @@ export default function Navbar() {
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     aria-current={item.href === pathname ? "page" : undefined}
@@ -66,7 +79,7 @@ export default function Navbar() {
                     )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </div>
@@ -76,7 +89,7 @@ export default function Navbar() {
             {loading && (
               <div className="w-9 h-9 rounded-full bg-zinc-500 animate-pulse"></div>
             )}
-            {user && (
+            {!loading && user && (
               <>
                 <Link
                   href="/cart"
@@ -96,28 +109,20 @@ export default function Navbar() {
                     className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
                   >
                     <MenuItem>
-                      <a
-                        href="#"
+                      <Link
+                        href="/profile"
                         className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                       >
                         Your Profile
-                      </a>
+                      </Link>
                     </MenuItem>
                     <MenuItem>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                      >
-                        Settings
-                      </a>
-                    </MenuItem>
-                    <MenuItem>
-                      <a
-                        href="#"
+                      <p
+                        onClick={handleLogout}
                         className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                       >
                         Sign out
-                      </a>
+                      </p>
                     </MenuItem>
                   </MenuItems>
                 </Menu>

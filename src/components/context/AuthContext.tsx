@@ -4,7 +4,8 @@ import { createContext, PropsWithChildren, useContext, useEffect, useState } fro
 import { usePathname, useRouter } from "next/navigation";
 
 import { IUserResponse } from "@/lib/types/responses/user.type";
-import { checkUser } from "@/lib/tools/api";
+import { getUser } from "@/lib/tools/api";
+import { getCookie } from "@/lib/tools/cookies";
 
 export const AuthContext = createContext<{
   user: IUserResponse | null;
@@ -24,7 +25,7 @@ export const AuthContextProvider = ({ children }: PropsWithChildren) => {
   async function updateUser() {
     setLoading(true);
     try {
-      const user = await checkUser();
+      const user = await getUser();
       setUser(user);
     } catch (error) {
       console.error("User verification failed");
@@ -33,9 +34,28 @@ export const AuthContextProvider = ({ children }: PropsWithChildren) => {
     }
   }
 
+  async function checkUser() {
+    setLoading(true);
+    try {
+      const token = await getCookie(process.env.NEXT_PUBLIC_TOKEN_NAME!);
+      if(!token) {
+        setUser(null);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
+    console.log("runs")
     updateUser();
-  }, [pathname, router]);
+  }, []);
+
+  useEffect(() => {
+    checkUser();
+  }, [router, pathname]);
 
   return (
     <AuthContext.Provider value={{ user, loading }}>
