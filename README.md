@@ -1,5 +1,5 @@
 
-# Stationery Shop
+# 📦 Stationery Shop
 
 The Stationery Shop is a full-stack e-commerce web application designed for selling school and office supplies, books, and toys. This project provides user authentication, product listing, shopping cart functionality, and a checkout process while dynamically fetching product data from the stationery-shop-api backend.
 
@@ -8,7 +8,7 @@ The Stationery Shop is a full-stack e-commerce web application designed for sell
 
 - 👤 Authentication & User Management
   - ✅ User Sign-up & Login (JWT-based authentication)
-  - ✅ Profile Page – Users can update first name and last name
+  - ✅ Profile Page – Users can update their profile data
 - 🛍️ Product Management
   - ✅ Product Listing Page – Browse stationery, books, and toys
   - ✅ Product Details Page – View product images, price, and description
@@ -25,9 +25,17 @@ The Stationery Shop is a full-stack e-commerce web application designed for sell
 All codes in this project are written by me.
 
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-HTML, CSS, JavaScript, TypeScript, Next.js, Tailwind, shadcn, react-hook-form, zod
+⚡ Next.js – React-based framework for server-side rendering & static site generation
+
+🎨 Tailwind CSS – Utility-first styling for fast UI development
+
+💡 ShadCN – Pre-styled UI components for a modern look
+
+✅ React Hook Form – Form handling and validation
+
+🛡️ Zod – Schema validation for form inputs
 
 
 ## Installation
