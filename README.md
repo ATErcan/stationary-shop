@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Stationery Shop
 
-First, run the development server:
+The Stationery Shop is a full-stack e-commerce web application designed for selling school and office supplies, books, and toys. This project provides user authentication, product listing, shopping cart functionality, and a checkout process while dynamically fetching product data from the stationery-shop-api backend.
 
+
+## Features
+
+- 👤 Authentication & User Management
+  - ✅ User Sign-up & Login (JWT-based authentication)
+  - ✅ Profile Page – Users can update first name and last name
+- 🛍️ Product Management
+  - ✅ Product Listing Page – Browse stationery, books, and toys
+  - ✅ Product Details Page – View product images, price, and description
+- 🛒 Shopping Cart & Checkout
+  - ✅ Authenticated users can add items to their cart
+  - ✅ Update Cart – Modify item quantity or remove items
+  - ✅ Checkout Process – Users can finalize their orders
+  
+
+
+## Authors
+
+- [@ATErcan](https://www.github.com/ATErcan)
+All codes in this project are written by me.
+
+
+## Tech Stack
+
+HTML, CSS, JavaScript, TypeScript, Next.js, Tailwind, shadcn, react-hook-form, zod
+
+
+## Installation
+Clone the project, and install the dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  $ git clone https://github.com/ATErcan/stationary-shop
+
+  $ npm install
 ```
+Create a .env file by following the Environment Variables section. Run the development server with the command below
+```bash
+  $ npm run dev
+```
+Go to http://localhost:3000/ on your browser
+## Environment Variables
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To run this project, you will need to add the following environment variables to your .env file
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+A cookie name env variable that will store the user jwt token
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`NEXT_PUBLIC_TOKEN_NAME`
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+## 🔗 Links
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ahmet-talha-ercan/)
+
