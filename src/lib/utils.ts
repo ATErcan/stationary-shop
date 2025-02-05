@@ -29,7 +29,7 @@ export function formatAmount(subtotal: number) {
   const [whole, fraction] = decimalAmount.split(".");
   const wholeFormatted = formatDecimalSeparator(whole);
   if (decimalAmount.includes(".")) {
-    return `${wholeFormatted},${fraction}`;
+    return `${wholeFormatted},${fraction.slice(0, 2)}`;
   } else {
     return `${wholeFormatted},00`;
   }
