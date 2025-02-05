@@ -6,8 +6,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -53,6 +53,13 @@ export default function ProfileForm() {
       }
     } catch (error) {
       console.error(error);
+      if (error instanceof Error) {
+        toast.error(error.message, { id: "update-profile-error" });
+      } else {
+        toast.error("Something went wrong. Please try again.", {
+          id: "update-profile-server-error",
+        });
+      }
     }
   }
 

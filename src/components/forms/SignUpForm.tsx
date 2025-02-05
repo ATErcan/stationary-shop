@@ -41,7 +41,13 @@ export default function SignUpForm() {
       toast.success("Sign up successful!", { id: "signup-success" })
       router.push('/');
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        toast.error(error.message, { id: "signup-error" });
+      } else {
+        toast.error("Something went wrong. Please try again.", {
+          id: "signup-server-error",
+        });
+      }
     }
   }
 

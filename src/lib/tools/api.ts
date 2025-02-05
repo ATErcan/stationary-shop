@@ -24,7 +24,7 @@ const Stationery_API = axios.create({
  * @returns {Promise<T>} - The data retrieved from the API.
  * @throws {E} - Throws an error of type `E` if the request fails.
  */
-export const fetchData = async <T, E = unknown>(
+export const fetchData = async <T>(
   url: string,
   options: AxiosRequestConfig = {}
 ): Promise<T> => {
@@ -32,15 +32,16 @@ export const fetchData = async <T, E = unknown>(
     const response: AxiosResponse<T> = await Stationery_API.get(url, options);
     return response.data;
   } catch (error) {
-    console.error('Error retrieving data:', error);
-
-    if (axios.isAxiosError(error) && error.response) {
-      throw error.response.data as E;
+    console.error("Error retrieving data:", error);
+    if (axios.isAxiosError(error)) {
+      const errorMessage =
+        error.response?.data?.error || "An unknown error occurred.";
+      throw new Error(errorMessage);
     }
-
-    throw new Error('Could not get data') as E;
+    throw new Error("Could not get data");
   }
 };
+
 
 /**
  * Sends a POST request to a given URL using axios and handles errors.
@@ -67,7 +68,9 @@ export const postData = async <T>(
   } catch (error) {
     console.error('Error posting data:', error);
     if (axios.isAxiosError(error)) {
-      throw error.response?.data.error;
+      const errorMessage =
+        error.response?.data?.error || "An unknown error occurred.";
+        throw new Error(errorMessage);
     } else {
       throw new Error('Unknown error while request');
     }
@@ -89,7 +92,9 @@ export const patchData = async <T>(
   } catch (error) {
     console.error("Error updating data:", error);
     if (axios.isAxiosError(error)) {
-      throw error.response?.data.error;
+      const errorMessage =
+        error.response?.data?.error || "An unknown error occurred.";
+      throw new Error(errorMessage);
     } else {
       throw new Error("Unknown error while request");
     }

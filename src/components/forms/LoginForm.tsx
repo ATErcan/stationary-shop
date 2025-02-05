@@ -38,7 +38,11 @@ export default function LoginForm() {
       toast.success("Login successful!", { id: "login-success" });
       router.push("/");
     } catch (error) {
-      console.error(error);
+      if (error instanceof Error) {
+        toast.error(error.message, { id: "login-error" });
+      } else {
+        toast.error("Something went wrong. Please try again.", { id: "login-server-error" });
+      }
     }
   }
 
