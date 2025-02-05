@@ -62,3 +62,20 @@ export const QuantitySchema = z.object({
     .min(1, { message: "Quantity must be at least 1" })
     .max(100, { message: "Quantity cannot exceed stock" }), // max will be updated dynamically
 });
+
+export const CheckoutFormValidation = z.object({
+  fullName: z.string().min(2, "Name is too short").max(50, "Name is too long"),
+  cardNumber: z
+    .string()
+    .min(16, "Card number must be 16 digits")
+    .max(16, "Card number must be 16 digits"),
+  expiry: z.string().refine(
+    (value) => {
+      const [month, year] = value.split("/").map(Number);
+      const expiryDate = new Date(Number(`20${year}`), month - 1);
+      return expiryDate > new Date();
+    },
+    { message: "Expiry date must be in the future" }
+  ),
+  cvc: z.string().min(3, "CVC must be 3 or 4 digits").max(4, "CVC must be 3 or 4 digits"),
+});
