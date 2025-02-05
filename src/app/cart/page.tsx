@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { getCart } from "@/lib/tools/api"
-import CartItem from "@/components/CartItem";
+import CartInfo from "@/components/cart/CartInfo";
 
 export default async function Cart() {
   const cart = await getCart();
@@ -20,11 +20,9 @@ export default async function Cart() {
   }
 
   return (
-    <main className="flex flex-col gap-8 px-2 py-6 sm:items-start sm:px-4">
+    <main className="flex flex-col gap-8 px-2 py-6 sm:px-4">
       <h1 className="self-start text-3xl font-bold w-full lg:max-w-[75rem] mx-auto sm:text-4xl">Cart</h1>
-      <div className="flex flex-col w-full gap-2 max-w-[75rem] mx-auto sm:gap-4">
-        {cart.data.map(item => <CartItem key={item.product._id} data={item} />)}
-      </div>
+      <CartInfo cart={cart} />
     </main>
   )
 }

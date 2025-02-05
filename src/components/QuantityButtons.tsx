@@ -56,7 +56,7 @@ export default function QuantityButtons({
       >
         <MinusIcon className="size-4" />
       </button>
-      <p className="w-8 text-center">{isUpdating ? "..." : localQuantity}</p>
+      <p className="text-center">{isUpdating ? ".." : localQuantity}</p>
       <button
         type="button"
         className="w-6 h-6 rounded-full flex items-center justify-center bg-zinc-200 disabled:opacity-50"
