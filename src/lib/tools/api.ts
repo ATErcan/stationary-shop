@@ -1,8 +1,12 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+
 import { STATIONERY_API, STATIONERY_API_TIMEOUT } from "../constants/api";
 import { ILoginRequest, ISignUpRequest, IUpdateProfileRequest } from "../types/requests/user.type";
 import { ILoginResponse, ISignUpResponse, IUserResponse } from "../types/responses/user.type";
 import { getCookie } from "./cookies";
+import { IAllProductsResponse, IProductResponse } from "../types/responses/product.type";
+import { buildParams } from "../utils";
+import { ProductQueryParams } from "../types/product.type";
 
 const Stationery_API = axios.create({
   baseURL: STATIONERY_API,
@@ -133,3 +137,13 @@ export const updateProfile = async (
     }
   );
 };
+
+export const getAllProducts = async (params: ProductQueryParams = {}): Promise<IAllProductsResponse> => {
+  const queryString = buildParams;
+  const url = `/products${queryString ? `?${queryString}` : ""}`;
+  return fetchData<IAllProductsResponse>(url);
+};
+
+export const getProduct = async (id: string): Promise<IProductResponse> => {
+  return fetchData<IProductResponse>(`products/${id}`)
+}
