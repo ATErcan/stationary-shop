@@ -16,7 +16,7 @@ export default function ProductCard({ data }: { data: Product }) {
       <Link href={`/products/${_id}`} className="flex flex-col">
         <div className="flex justify-between gap-1 sm:gap-2">
           <h2 className="text-sm font-semibold sm:text-lg" style={textOverflowEllipsis.singleLine}>{capitalize(name)}</h2>
-          <h3 className="text-sm font-semibold sm:text-lg">{formatAmount(price)}</h3>
+          <h3 className="text-sm font-semibold sm:text-lg">{`$${formatAmount(price)}`}</h3>
         </div>
         <div>
           <h4 className="text-xs sm:text-sm">

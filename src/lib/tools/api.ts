@@ -4,7 +4,7 @@ import { STATIONERY_API, STATIONERY_API_TIMEOUT } from "../constants/api";
 import { ILoginRequest, ISignUpRequest, IUpdateProfileRequest } from "../types/requests/user.type";
 import { ILoginResponse, ISignUpResponse, IUserResponse } from "../types/responses/user.type";
 import { getCookie } from "./cookies";
-import { IAllProductsResponse } from "../types/responses/product.type";
+import { IAllProductsResponse, IProductResponse } from "../types/responses/product.type";
 import { buildParams } from "../utils";
 import { ProductQueryParams } from "../types/product.type";
 
@@ -143,3 +143,7 @@ export const getAllProducts = async (params: ProductQueryParams = {}): Promise<I
   const url = `/products${queryString ? `?${queryString}` : ""}`;
   return fetchData<IAllProductsResponse>(url);
 };
+
+export const getProduct = async (id: string): Promise<IProductResponse> => {
+  return fetchData<IProductResponse>(`products/${id}`)
+}
