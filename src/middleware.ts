@@ -8,7 +8,6 @@ export async function middleware(req: NextRequest) {
 
   const token = await getCookie(process.env.NEXT_PUBLIC_TOKEN_NAME!);
   const pathNames = pathname.split("/");
-  console.log(pathNames)
 
   if (
     (pathNames[1] === "login" && token) ||

@@ -55,3 +55,10 @@ export const ProfileFormValidation = z.object({
     .trim()
     .max(30, "Last name must be at most 30 characters"),
 });
+
+export const QuantitySchema = z.object({
+  quantity: z
+    .number()
+    .min(1, { message: "Quantity must be at least 1" })
+    .max(100, { message: "Quantity cannot exceed stock" }), // max will be updated dynamically
+});

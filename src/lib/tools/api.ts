@@ -7,6 +7,7 @@ import { getCookie } from "./cookies";
 import { IAllProductsResponse, IProductResponse } from "../types/responses/product.type";
 import { buildParams } from "../utils";
 import { ProductQueryParams } from "../types/product.type";
+import { ICartResponse, IUpdatedCartResponse } from "../types/responses/cart.type";
 
 const Stationery_API = axios.create({
   baseURL: STATIONERY_API,
@@ -139,11 +140,37 @@ export const updateProfile = async (
 };
 
 export const getAllProducts = async (params: ProductQueryParams = {}): Promise<IAllProductsResponse> => {
-  const queryString = buildParams;
+  const queryString = buildParams(params);
   const url = `/products${queryString ? `?${queryString}` : ""}`;
   return fetchData<IAllProductsResponse>(url);
 };
 
 export const getProduct = async (id: string): Promise<IProductResponse> => {
   return fetchData<IProductResponse>(`products/${id}`)
+}
+
+export const getCart = async (): Promise<ICartResponse | null> => {
+  const token = await getCookie(process.env.NEXT_PUBLIC_TOKEN_NAME!);
+  if (!token) return null;
+  return fetchData<ICartResponse>("/cart", {
+    headers: {
+      Authorization: `Bearer ${token.value}`,
+    },
+  });
+};
+
+export const updateCart = async (
+  data: { productId: string, quantity: number }
+): Promise<IUpdatedCartResponse | null> => {
+  const token = await getCookie(process.env.NEXT_PUBLIC_TOKEN_NAME!);
+  if (!token) return null;
+  return postData<IUpdatedCartResponse>(
+    "/cart",
+    { ...data },
+    {
+      headers: {
+        Authorization: `Bearer ${token.value}`,
+      },
+    }
+  );
 }

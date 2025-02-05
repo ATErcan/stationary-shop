@@ -29,7 +29,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  console.log(user);
   const navigation = useMemo(() => {
     return user ? userNav : guestNav
   }, [user])
