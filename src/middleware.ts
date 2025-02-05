@@ -29,7 +29,6 @@ export const config = {
     "/login",
     "/signup",
     "/profile",
-    "/bag/thank-you/:path*",
-    "/auth/:path*",
+    "/cart/:path*",
   ],
 };

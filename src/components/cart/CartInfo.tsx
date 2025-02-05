@@ -4,6 +4,7 @@ import { ICartResponse } from "@/lib/types/responses/cart.type";
 import CartItem from "./CartItem";
 import { formatAmount } from "@/lib/utils";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 const SHIPPING = 20;
 
@@ -36,7 +37,17 @@ export default function CartInfo({ cart }: { cart: ICartResponse }) {
           <p>Total</p>
           <p>${formatAmount(subtotal + SHIPPING)}</p>
         </div>
-        <Button className="w-full">Checkout</Button>
+        <Button className="w-full p-0">
+          <Link
+            href={{
+              pathname: "/cart/checkout",
+              query: { price: formatAmount(subtotal + SHIPPING) },
+            }}
+            className="w-full h-full py-2 px-4 rounded-lg"
+          >
+            Checkout
+          </Link>
+        </Button>
       </div>
     </div>
   );
