@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { IUserResponse } from "@/lib/types/responses/user.type";
 import { getUser } from "@/lib/tools/api";
-import { getCookie } from "@/lib/tools/cookies";
 
 export const AuthContext = createContext<{
   user: IUserResponse | null;
@@ -36,27 +35,8 @@ export const AuthContextProvider = ({ children }: PropsWithChildren) => {
     }
   }
 
-  async function checkUser() {
-    setLoading(true);
-    try {
-      const token = await getCookie(process.env.NEXT_PUBLIC_TOKEN_NAME!);
-      if(!token) {
-        setUser(null);
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
-    console.log("runs")
     updateUser();
-  }, []);
-
-  useEffect(() => {
-    checkUser();
   }, [router, pathname]);
 
   return (

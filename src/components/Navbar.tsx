@@ -14,9 +14,11 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import { navigation } from "@/lib/config/navConfig";
+import { guestNav, userNav } from "@/lib/config/navConfig";
 import { useAuth } from "./context/AuthContext";
 import { deleteCookie } from "@/lib/tools/cookies";
+import { useMemo } from "react";
+import Image from "next/image";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -26,6 +28,11 @@ export default function Navbar() {
   const { user, loading } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
+
+  console.log(user);
+  const navigation = useMemo(() => {
+    return user ? userNav : guestNav
+  }, [user])
 
   const handleLogout = async () => {
     try {
@@ -56,12 +63,14 @@ export default function Navbar() {
               />
             </DisclosureButton>
           </div>
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex shrink-0 items-center">
-              <img
-                alt="Your Company"
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto"
+          <div className="flex flex-1 items-center justify-center sm:justify-start">
+            <div className="flex shrink-0 h-full items-center">
+              <Image
+                alt="Logo"
+                src={"/icons/logo.png"}
+                width={24}
+                height={24}
+                priority
               />
             </div>
             <div className="hidden sm:ml-6 sm:block">
