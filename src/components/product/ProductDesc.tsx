@@ -28,7 +28,7 @@ export default function ProductDesc({ data }: { data: Product }) {
     const { _id, brand, color, category, stock } = data;
     const descData = [
       { name: "Brand", value: brand },
-      { name: "Color", value: color },
+      { name: "Color", value: color || "N/A" },
       { name: "In Stock", value: stock.toString() },
       { name: "Category", value: capitalize((category as Category).name) },
       { name: "Product Code", value: _id.slice(0, 5) },
