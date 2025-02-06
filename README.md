@@ -22,6 +22,7 @@ The Stationery Shop is a full-stack e-commerce web application designed for sell
 ## Authors
 
 - [@ATErcan](https://www.github.com/ATErcan)
+  
 Ahmet Talha Ercan
 
 StudentID: 42169
