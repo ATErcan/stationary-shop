@@ -18,7 +18,7 @@ export interface BaseProduct extends APIResponse {
 
 export interface Stationery extends BaseProduct {
   productType: "Stationery";
-  color: string;
+  color?: string;
   brand: string;
 }
 
