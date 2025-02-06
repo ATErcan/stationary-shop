@@ -9,7 +9,7 @@ export default function ProductCard({ data }: { data: Product }) {
   const { _id, name, price, images, productType, ...product } = data;
   const thumbnail = images[0];
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 w-full">
       <div className="w-full aspect-square relative">
         <Image src={thumbnail} alt={name} fill className="object-cover" priority />
       </div>
