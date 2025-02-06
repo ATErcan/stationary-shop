@@ -22,6 +22,10 @@ The Stationery Shop is a full-stack e-commerce web application designed for sell
 ## Authors
 
 - [@ATErcan](https://www.github.com/ATErcan)
+Ahmet Talha Ercan
+
+StudentID: 42169
+
 All codes in this project are written by me.
 
 
@@ -58,7 +62,9 @@ A cookie name env variable that will store the user jwt token
 
 `NEXT_PUBLIC_TOKEN_NAME`
 
+## Appendix
 
+This is a simple e-commerce website that I did as a project in my university
 
 
 
